@@ -1,0 +1,12 @@
+#recipientList {
+    float:left;
+}
+
+#sendMessageButton {
+    margin-left: 30px;
+}
+
+#messageTextBox {
+    width:70%;
+    margin-left:10px;
+}
