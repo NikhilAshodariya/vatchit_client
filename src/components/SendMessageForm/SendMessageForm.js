@@ -9,7 +9,7 @@ class SendMessageForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            "friendsList": ["Aakash", "Kumar", "Neil", "Hardik"]
+            "friendsList": props.friendsList
         };
     }
 
@@ -19,15 +19,11 @@ class SendMessageForm extends Component {
                 <Form>
                     <Form.Group id="recipientList" controlId="exampleForm.ControlSelect1">
                         <Form.Label>Example select</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control as="select" id="FriendsList">
                             {
-                                this.state["friendsList"].map(val=> <option value={val}>{val}</option>)
+                                this.props.friendsList!==[]?
+                                this.props.friendsList.map(val=> <option value={val["email"]}>{val["email"]}</option>):<div></div>
                             }
-                            {/*<option>1</option>*/}
-                            {/*<option>2</option>*/}
-                            {/*<option>3</option>*/}
-                            {/*<option>4</option>*/}
-                            {/*<option>5</option>*/}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -42,5 +38,4 @@ class SendMessageForm extends Component {
         )
     }
 }
-
 export default SendMessageForm;

@@ -5,6 +5,7 @@ import Message from "./components/Message/Message";
 import MessageArea from "./components/MessageArea/MessageArea.js";
 import SendMessageForm from "./components/SendMessageForm/SendMessageForm.js";
 import Login from "./components/Login/Login.js";
+import Chat from "./components/Chat/Chat";
 import {Route, Switch} from "react-router";
 import {BrowserRouter as Router} from "react-router-dom";
 
@@ -21,11 +22,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/' component={Login}/>
                         <Route path="/chat">
-                            <div>
-                                <CustomNavbar/>
-                                <MessageArea/>
-                                <SendMessageForm/>
-                            </div>
+                            <Chat/>
                         </Route>
                         <Route path="*">
                             <div>
