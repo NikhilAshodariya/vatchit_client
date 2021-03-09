@@ -1,12 +1,35 @@
 import React, {Component} from "react";
-import {Form} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {Redirect} from "react-router";
+import {Form} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import Bcyrpt from "bcryptjs";
-import Chat from "../Chat/Chat";
+import Login from "../Login/Login";
 
-export default class Login extends Component {
+/*handleSubmit = (event) => {
+    console.log(event)
+    let config = {
+        headers: {
+            "content-type": "application/json",
+        }
+    };
+    let data = {
+        "email": this.state.email,
+        "password": this.state.password
+    };
+    axios.post("http://localhost:8081/signup/",data,config).then(
+        element => element["data"]["isUserCreated"]===true?
+            this.setState({
+                LoginStatus: true,
+                email: event.target[0].defaultValue
+            })
+            :alert(element["data"]["msg"])
+    );
+
+    event.preventDefault();
+};*/
+
+export default class SignUp extends Component {
     constructor(props) {
         super(props);
 
@@ -30,33 +53,37 @@ export default class Login extends Component {
             "password": this.state.password
         };
 
-        axios.post("http://localhost:8081/login/",data,config).then(
-            element => {
-                element["data"]["status"] === "Success"? this.setState({
+        axios.post("http://localhost:8081/signup/",data,config).then(
+            element => element["data"]["status"] === "Success"? this.setState({
                 email: this.state.email,
                 password: this.state.password,
                 isValidUser: true
-            }):alert(element["data"]["status"]);
-
-                localStorage.setItem("isValidUser","true");
-            }
+            }):alert(element["data"]["status"])
         );
         event.preventDefault();
     };
 
     render() {
-        if (localStorage.getItem("isValidUser") === "true") {
+        if (this.state.isValidUser === true) {
             return (
-                <div>
-                    redirect to /chat url
-                </div>
+                <Redirect to='/' />
             )
-        }else {
+        } else {
             return (
-                <div id="loginTab" style={{"visibility":"visible"}} className="auth-wrapper">
+                <div id="signupTab" style={{"visibility":"hidden"}} className="auth-wrapper">
                     <div className="auth-inner">
                         <form>
-                            <h3>Sign In</h3>
+                            <h3>Sign Up</h3>
+
+                            <div className="form-group">
+                                <label>First name</label>
+                                <input type="text" className="form-control" placeholder="First name" />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Last name</label>
+                                <input type="text" className="form-control" placeholder="Last name" />
+                            </div>
 
                             <div className="form-group">
                                 <label>Email address</label>
@@ -76,16 +103,12 @@ export default class Login extends Component {
                                        placeholder="Enter password" />
                             </div>
 
-                            <div className="form-group">
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                    <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                                </div>
-                            </div>
+                            <button type="submit"
+                                    onClick={this.handler}
+                                    className="btn btn-primary btn-block">Sign Up</button>
 
-                            <button type="submit" onClick={this.handler} className="btn btn-primary btn-block">Submit</button>
                             <p className="forgot-password text-right">
-                                Forgot <a href="#">password?</a>
+                                Already registered <a href="#">sign in?</a>
                             </p>
                         </form>
                     </div>

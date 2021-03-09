@@ -5,14 +5,15 @@ import Message from "./components/Message/Message";
 import MessageArea from "./components/MessageArea/MessageArea.js";
 import SendMessageForm from "./components/SendMessageForm/SendMessageForm.js";
 import Login from "./components/Login/Login.js";
+import SignUp from "./components/SignUp/SignUp";
 import Chat from "./components/Chat/Chat";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {Route, Switch} from "react-router";
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
     }
 
     render() {
@@ -20,10 +21,19 @@ class App extends React.Component {
             <div>
                 <Router>
                     <Switch>
-                        <Route exact path='/' component={Login}/>
-                        <Route path="/chat">
-                            <Chat/>
+                        <Route exact path='/' >
+                            <CustomNavbar/>
+                            <Login/>
+                            <SignUp/>
                         </Route>
+                        {/*<Route path="/signin">*/}
+                        {/*    <CustomNavbar pageChangerHandler={this.pageChangerHandler}/>*/}
+                        {/*    <Login></Login>*/}
+                        {/*</Route>*/}
+                        {/*<Route path="/signup">*/}
+                        {/*    <CustomNavbar pageChangerHandler={this.pageChangerHandler}/>*/}
+                        {/*    <SignUp></SignUp>*/}
+                        {/*</Route>*/}
                         <Route path="*">
                             <div>
                                 This is a wrong URL dude
